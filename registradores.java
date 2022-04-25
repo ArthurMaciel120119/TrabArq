@@ -1,9 +1,14 @@
+import java.util.*;
+import java.io.*;
+
 public class registradores {
 
-    private String[] palavra;
+    private String palavra;
+    private String endereco;
+    private String opcode;
 
-    public String[] marbusca(String[] endereco) {
-        String[] endmar;
+    public String marbusca(String endereco) {
+        String endmar;
         registradores mar = new registradores();
         endmar = mar.pcbusca(endereco);
         System.out.println("MAR recebendo instrucao de PC e enviando para memoria no Ciclo de Busca");
@@ -12,46 +17,63 @@ public class registradores {
         return endmar;
     }
 
-    public void mbrbusca(String[] dado) {
+    public String mbrbusca(String dado,String dado2) {
         System.out.println("MBR recebe dado lido pela Memoria e envia o cod. op. para IR no Ciclo de Busca");
+        return opcode;
     }
 
-    public String[] irbusca(String[] palavra) {
-        String[] opcode;
+    public String irbusca(String palavra) {
+        String opcode = new String();
         int i;
 
-        for (i = 0; i < 3; i++) {
-            opcode[i] = palavra[i];
+        for (i = 0; i<4; i++) {
+            opcode = opcode+palavra.charAt(i);
         }
         System.out.println("IR recebe o cod. op. e armazena no Ciclo de Busca");
         System.out.println("OPCODE -> " + opcode);
         return opcode;
     }
 
-    public void ibr() {
 
-    }
-
-    public String[] ac(ula resultado) {
+    public String ac(String resultado) {
         int i;
-        String[] acumulador;
-        for (i = 0; i < resultado.length; i++) {
-            acumulador[i] = resultado[i];
+        String acumulador = new String();
+        for (i = 0; i < resultado.length(); i++) {
+            acumulador = resultado.charAt(i) + acumulador;
         }
-
+        System.out.println("Acumulador recebendo o valor -> " + acumulador);
         return acumulador;
-
     }
 
-    public String[] pcbusca(String[] endereco) {
-        System.out.println("Manda o endereco para MAR no Ciclo de Busca");
+    public String pcbusca(String endereco) {
+        int cont = 0;
+        if (cont == 0) {
+            System.out.println("Instrucao no Ciclo de Busca");
+            cont++;
+        }
         return endereco;
     }
 
-    public void pcbusca2(String[] endereco) {
-        System.out.println("Aponta para prox instrucao e finaliza o Ciclo de Busca");
+    public int pcexecucao(String endereco) {
+        int cont = 0;
+        for (int i = 0; i < 2; i++) {
+            if (cont == 0) {
+                System.out.println("Instrucao sendo Executada");
+                cont++;
+            } else if (cont >= 1) {
+                System.out.println("Proxima instrucao sendo Executada");
+            }
+        }
+        return cont;
     }
 
+    public String irexecucao(String palavra){
+        System.out.println("IR sendo decodificado no Ciclo de Execucao");
+        for (int i = 0; i < 3; i++) {
+            opcode = opcode + palavra.charAt(i);
+        }
+        return opcode;
+    }
     /*
      * public void mq(){
      * 
